@@ -20,7 +20,7 @@ public class BruteCollinearPoints {
 
         for (j = 0; j < points.length; j++) {
             for (k = 0; k < points.length; k++) {
-                if (j != k && points[k] == points[j]) {
+                if (j != k && points[k].compareTo(points[j]) == 0) {
                     throw new java.lang.IllegalArgumentException();
                 }
             }
