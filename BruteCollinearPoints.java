@@ -36,9 +36,9 @@ public class BruteCollinearPoints {
                         }
 
                         // Check if order is ascending
-                        if (points[i].compareTo(points[j]) != -1 ||
-                                points[j].compareTo(points[k]) != -1 ||
-                                points[k].compareTo(points[l]) != -1) {
+                        if (points[i].compareTo(points[j]) < 0 ||
+                                points[j].compareTo(points[k]) < 0 ||
+                                points[k].compareTo(points[l]) < 0) {
                             continue;
                         }
 
