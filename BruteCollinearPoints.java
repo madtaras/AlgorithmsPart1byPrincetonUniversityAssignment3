@@ -3,14 +3,13 @@ import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdDraw;
 
 public class BruteCollinearPoints {
-    private LineSegment[] tempLineSegments;
     private LineSegment[] lineSegments;
 
     public BruteCollinearPoints(Point[] points) {
         int i, j, k, l;
         int counter;
         double slope;
-        tempLineSegments = new LineSegment[100];
+        LineSegment[] tempLineSegments = new LineSegment[100];
 
         if (points == null) {
             throw new java.lang.NullPointerException();
@@ -21,7 +20,7 @@ public class BruteCollinearPoints {
 
         for (j = 0; j < points.length; j++) {
             for (k = 0; k < points.length; k++) {
-                if (j != k && points[k] == points[j]){
+                if (j != k && points[k] == points[j]) {
                     throw new java.lang.IllegalArgumentException();
                 }
             }
@@ -48,7 +47,7 @@ public class BruteCollinearPoints {
                             if (points[k].slopeTo(points[l]) == slope) {
                                 counter = 0;
                                 for (int m = 0; m < tempLineSegments.length; m++) {
-                                    if (tempLineSegments[m] != null) counter ++;
+                                    if (tempLineSegments[m] != null) counter++;
                                 }
 
                                 tempLineSegments[counter] = new LineSegment(points[i], points[j]);
@@ -61,7 +60,7 @@ public class BruteCollinearPoints {
 
         counter = 0;
         for (int m = 0; m < tempLineSegments.length; m++) {
-            if (tempLineSegments[m] != null) counter ++;
+            if (tempLineSegments[m] != null) counter++;
         }
         lineSegments = new LineSegment[counter];
         for (i = 0; i < counter; i++) {
@@ -78,7 +77,6 @@ public class BruteCollinearPoints {
     }
 
     public static void main(String[] args) {
-
         // read the n points from a file
         In in = new In(args[0]);
         int n = in.readInt();
