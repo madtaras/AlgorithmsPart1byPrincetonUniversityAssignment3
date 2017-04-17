@@ -43,7 +43,7 @@ public class FastCollinearPoints {
                     selectedFour[2] = pointsCopy[j+1];
                     selectedFour[3] = pointsCopy[j+2];
 
-                    SortArray(selectedFour);
+                    sortArray(selectedFour);
 
                     LineSegment newLineSegment = new LineSegment(selectedFour[0], selectedFour[3]);
                     String newLineSegmentStr = newLineSegment.toString();
@@ -71,8 +71,7 @@ public class FastCollinearPoints {
         }
     }
 
-
-    private static void SortArray(Point[] miniPointsArray) {
+    private static void sortArray(Point[] miniPointsArray) {
         Point temp;
 
         for (int i = 0; i < miniPointsArray.length; i++) {
