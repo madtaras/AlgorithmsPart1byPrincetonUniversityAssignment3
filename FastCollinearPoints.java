@@ -10,8 +10,6 @@ public class FastCollinearPoints {
         int i, j, k;
         int counter;
         LineSegment[] tempLineSegments = new LineSegment[100];
-        Point[] pointsCopy = new Point[points.length];
-        System.arraycopy(points, 0, pointsCopy, 0, points.length);
 
         if (points == null) {
             throw new java.lang.NullPointerException();
@@ -28,6 +26,8 @@ public class FastCollinearPoints {
             }
         }
 
+        Point[] pointsCopy = new Point[points.length];
+        System.arraycopy(points, 0, pointsCopy, 0, points.length);
         Point[] selectedFour = new Point[4];
 
         for (i = 0; i < points.length; i++) {
@@ -83,13 +83,6 @@ public class FastCollinearPoints {
                     miniPointsArray[j] = temp;
                 }
             }
-        }
-    }
-
-    private static void printArray(Point[] anArray) {
-        for (int i = 0; i < anArray.length; i++) {
-            System.out.print(anArray[i]);
-            System.out.print(", \n");
         }
     }
 
