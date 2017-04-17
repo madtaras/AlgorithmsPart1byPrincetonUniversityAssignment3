@@ -64,7 +64,9 @@ public class FastCollinearPoints {
     }
 
     public LineSegment[] segments() {
-        return this.lineSegments;
+        LineSegment[] result = new LineSegment[this.lineSegments.length];
+        System.arraycopy(this.lineSegments, 0, result, 0, this.lineSegments.length);
+        return result;
     }
 
     public static void main(String[] args) {
