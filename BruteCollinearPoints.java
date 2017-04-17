@@ -50,7 +50,7 @@ public class BruteCollinearPoints {
                                     if (tempLineSegments[m] != null) counter++;
                                 }
 
-                                tempLineSegments[counter] = new LineSegment(points[i], points[j]);
+                                tempLineSegments[counter] = new LineSegment(points[i], points[l]);
                             }
                         }
                     }
