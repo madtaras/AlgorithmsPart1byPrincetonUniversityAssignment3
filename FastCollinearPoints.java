@@ -9,9 +9,9 @@ public class FastCollinearPoints {
     public FastCollinearPoints(Point[] points) {
         int i, j, k;
         int counter;
-        double slope;
-        Point currentPoint;
         LineSegment[] tempLineSegments = new LineSegment[100];
+        Point[] pointsCopy = new Point[points.length];
+        System.arraycopy(points, 0, pointsCopy, 0, points.length);
 
         if (points == null) {
             throw new java.lang.NullPointerException();
@@ -28,19 +28,32 @@ public class FastCollinearPoints {
             }
         }
 
-        printArray(points);
-        currentPoint = points[0];
-        StdOut.println("-------\n");
-        Arrays.sort(points, currentPoint.slopeOrder());
-        printArray(points);
+        Point[] selectedFour = new Point[4];
 
-        // TODO: copy array
-        //        for (i = 0; i < points.length; i++) {
-//            currentPoint = points[i];
-//            // TODO: copy array
-//            Arrays.sort(twoDim, currentPoint.slopeOrder());
-//            // Arrays.sort()
-//        }
+        for (i = 0; i < points.length; i++) {
+            Arrays.sort(pointsCopy, points[i].slopeOrder());
+            for (j = 0; j < pointsCopy.length-3; j++) {
+                double slope1 = points[i].slopeTo(pointsCopy[j]);
+                double slope2 = points[i].slopeTo(pointsCopy[j+1]);
+                double slope3 = points[i].slopeTo(pointsCopy[j+2]);
+
+                if (slope1 == slope2 && slope2 == slope3) {
+                    selectedFour[0] = points[i];
+                    selectedFour[1] = pointsCopy[j];
+                    selectedFour[2] = pointsCopy[j+1];
+                    selectedFour[3] = pointsCopy[j+2];
+
+                    SortArray(selectedFour);
+
+                    counter = 0;
+                    for (int m = 0; m < tempLineSegments.length; m++) {
+                        if (tempLineSegments[m] != null) counter++;
+                    }
+
+                    tempLineSegments[counter] = new LineSegment(selectedFour[0], selectedFour[3]);
+                }
+            }
+        }
 
         counter = 0;
         for (int m = 0; m < tempLineSegments.length; m++) {
@@ -49,6 +62,21 @@ public class FastCollinearPoints {
         lineSegments = new LineSegment[counter];
         for (i = 0; i < counter; i++) {
             lineSegments[i] = tempLineSegments[i];
+        }
+    }
+
+
+    private static void SortArray(Point[] miniPointsArray) {
+        Point temp;
+
+        for (int i = 0; i < miniPointsArray.length; i++) {
+            for (int j = i+1; j < miniPointsArray.length; j++) {
+                if (miniPointsArray[i].compareTo(miniPointsArray[j]) == 1) {
+                    temp = miniPointsArray[i];
+                    miniPointsArray[i] = miniPointsArray[j];
+                    miniPointsArray[j] = temp;
+                }
+            }
         }
     }
 
