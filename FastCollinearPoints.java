@@ -32,7 +32,7 @@ public class FastCollinearPoints {
 
         for (i = 0; i < points.length; i++) {
             Arrays.sort(pointsCopy, points[i].slopeOrder());
-            for (j = 0; j < pointsCopy.length-3; j++) {
+            for (j = 0; j < pointsCopy.length - 2; j++) {
                 double slope1 = points[i].slopeTo(pointsCopy[j]);
                 double slope2 = points[i].slopeTo(pointsCopy[j+1]);
                 double slope3 = points[i].slopeTo(pointsCopy[j+2]);
