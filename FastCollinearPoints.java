@@ -44,7 +44,7 @@ public class FastCollinearPoints {
 
         counter = 0;
         for (int m = 0; m < tempLineSegments.length; m++) {
-            if (tempLineSegments[m] != null) counter ++;
+            if (tempLineSegments[m] != null) counter++;
         }
         lineSegments = new LineSegment[counter];
         for (i = 0; i < counter; i++) {
