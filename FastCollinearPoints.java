@@ -45,12 +45,18 @@ public class FastCollinearPoints {
 
                     SortArray(selectedFour);
 
+                    LineSegment newLineSegment = new LineSegment(selectedFour[0], selectedFour[3]);
+                    String newLineSegmentStr = newLineSegment.toString();
                     counter = 0;
+                    boolean isDuplicate = false;
                     for (int m = 0; m < tempLineSegments.length; m++) {
-                        if (tempLineSegments[m] != null) counter++;
+                        if (tempLineSegments[m] != null) {
+                            counter++;
+                            if (tempLineSegments[m].toString().equals(newLineSegmentStr)) isDuplicate = true;
+                        }
                     }
 
-                    tempLineSegments[counter] = new LineSegment(selectedFour[0], selectedFour[3]);
+                    if (!isDuplicate) tempLineSegments[counter] = newLineSegment;
                 }
             }
         }
