@@ -8,8 +8,8 @@ public class FastCollinearPoints {
 
     public FastCollinearPoints(Point[] points) {
         int i, j, k;
-        int counter;
-        LineSegment[] tempLineSegments = new LineSegment[100];
+        int counter = 0;
+        Point[][] tempLineSegments = new Point[100][2];
 
         if (points == null) {
             throw new java.lang.NullPointerException();
@@ -45,29 +45,25 @@ public class FastCollinearPoints {
 
                     sortArray(selectedFour);
 
-                    LineSegment newLineSegment = new LineSegment(selectedFour[0], selectedFour[3]);
-                    String newLineSegmentStr = newLineSegment.toString();
-                    counter = 0;
                     boolean isDuplicate = false;
-                    for (int m = 0; m < tempLineSegments.length; m++) {
-                        if (tempLineSegments[m] != null) {
-                            counter++;
-                            if (tempLineSegments[m].toString().equals(newLineSegmentStr)) isDuplicate = true;
+                    for (int m = 0; m < counter; m++) {
+                        if (tempLineSegments[m][0].compareTo(selectedFour[0]) == 0 &&
+                                tempLineSegments[m][1].compareTo(selectedFour[3]) == 0) {
+                            isDuplicate = true;
                         }
                     }
-
-                    if (!isDuplicate) tempLineSegments[counter] = newLineSegment;
+                    if (!isDuplicate) {
+                        tempLineSegments[counter][0] = selectedFour[0];
+                        tempLineSegments[counter][1] = selectedFour[3];
+                        counter += 1;
+                    }
                 }
             }
         }
 
-        counter = 0;
-        for (int m = 0; m < tempLineSegments.length; m++) {
-            if (tempLineSegments[m] != null) counter++;
-        }
         lineSegments = new LineSegment[counter];
         for (i = 0; i < counter; i++) {
-            lineSegments[i] = tempLineSegments[i];
+            lineSegments[i] = new LineSegment(tempLineSegments[i][0], tempLineSegments[i][1]);
         }
     }
 
