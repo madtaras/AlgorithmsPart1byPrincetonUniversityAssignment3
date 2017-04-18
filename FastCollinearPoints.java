@@ -72,7 +72,7 @@ public class FastCollinearPoints {
 
         for (int i = 0; i < miniPointsArray.length; i++) {
             for (int j = i+1; j < miniPointsArray.length; j++) {
-                if (miniPointsArray[i].compareTo(miniPointsArray[j]) == 1) {
+                if (miniPointsArray[i].compareTo(miniPointsArray[j]) > 0) {
                     temp = miniPointsArray[i];
                     miniPointsArray[i] = miniPointsArray[j];
                     miniPointsArray[j] = temp;
