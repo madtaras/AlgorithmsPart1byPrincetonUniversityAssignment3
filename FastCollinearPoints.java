@@ -2,14 +2,16 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdDraw;
 import java.util.Arrays;
+import java.util.*;
 
 public class FastCollinearPoints {
-    private LineSegment[] lineSegments;
+    private ArrayList<LineSegment> lineSegments;
 
     public FastCollinearPoints(Point[] points) {
         int i, j, k;
-        int counter = 0;
-        Point[][] tempLineSegments = new Point[100][2];
+
+        ArrayList<Point[]> lineSegmentsPoints = new ArrayList<>();
+        lineSegments = new ArrayList<LineSegment>();
 
         if (points == null) {
             throw new java.lang.NullPointerException();
@@ -46,24 +48,22 @@ public class FastCollinearPoints {
                     sortArray(selectedFour);
 
                     boolean isDuplicate = false;
-                    for (int m = 0; m < counter; m++) {
-                        if (tempLineSegments[m][0].compareTo(selectedFour[0]) == 0 &&
-                                tempLineSegments[m][1].compareTo(selectedFour[3]) == 0) {
+                    for (int m = 0; m < lineSegmentsPoints.size(); m++) {
+
+                        if (lineSegmentsPoints.get(m)[0].compareTo(selectedFour[0]) == 0 &&
+                                lineSegmentsPoints.get(m)[1].compareTo(selectedFour[3]) == 0) {
                             isDuplicate = true;
                         }
                     }
                     if (!isDuplicate) {
-                        tempLineSegments[counter][0] = selectedFour[0];
-                        tempLineSegments[counter][1] = selectedFour[3];
-                        counter += 1;
+                        lineSegmentsPoints.add(new Point[]{selectedFour[0], selectedFour[3]});
                     }
                 }
             }
         }
 
-        lineSegments = new LineSegment[counter];
-        for (i = 0; i < counter; i++) {
-            lineSegments[i] = new LineSegment(tempLineSegments[i][0], tempLineSegments[i][1]);
+        for (i = 0; i < lineSegmentsPoints.size(); i++) {
+            lineSegments.add(new LineSegment(lineSegmentsPoints.get(i)[0], lineSegmentsPoints.get(i)[1]));
         }
     }
 
@@ -82,12 +82,12 @@ public class FastCollinearPoints {
     }
 
     public int numberOfSegments() {
-        return this.lineSegments.length;
+        return lineSegments.size();
     }
 
     public LineSegment[] segments() {
-        LineSegment[] result = new LineSegment[this.lineSegments.length];
-        System.arraycopy(this.lineSegments, 0, result, 0, this.lineSegments.length);
+        LineSegment[] result = new LineSegment[lineSegments.size()];
+        result = lineSegments.toArray(result);
         return result;
     }
 
