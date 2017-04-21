@@ -2,14 +2,13 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdDraw;
 import java.util.Arrays;
-import java.util.*;
+import java.util.ArrayList;
 
 public class FastCollinearPoints {
     private ArrayList<LineSegment> lineSegments;
 
     public FastCollinearPoints(Point[] points) {
         int i, j, k, m;
-        ArrayList<Set<Point>> sp = new ArrayList<>();
         ArrayList<Point[]> lineSegmentsPoints = new ArrayList<>();
         lineSegments = new ArrayList<LineSegment>();
         boolean isDuplicate;
@@ -31,7 +30,6 @@ public class FastCollinearPoints {
 
         Point[] pointsCopy = new Point[points.length];
         System.arraycopy(points, 0, pointsCopy, 0, points.length);
-        Point[] selectedFour = new Point[4];
 
         for (i = 0; i < points.length; i++) {
             Arrays.sort(pointsCopy, points[i].slopeOrder());
@@ -75,20 +73,6 @@ public class FastCollinearPoints {
 
         for (i = 0; i < lineSegmentsPoints.size(); i++) {
             lineSegments.add(new LineSegment(lineSegmentsPoints.get(i)[0], lineSegmentsPoints.get(i)[1]));
-        }
-    }
-
-    private static void sortArray(Point[] miniPointsArray) {
-        Point temp;
-
-        for (int i = 0; i < miniPointsArray.length; i++) {
-            for (int j = i+1; j < miniPointsArray.length; j++) {
-                if (miniPointsArray[i].compareTo(miniPointsArray[j]) > 0) {
-                    temp = miniPointsArray[i];
-                    miniPointsArray[i] = miniPointsArray[j];
-                    miniPointsArray[j] = temp;
-                }
-            }
         }
     }
 
