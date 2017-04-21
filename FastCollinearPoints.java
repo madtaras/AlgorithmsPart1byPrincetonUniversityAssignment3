@@ -8,7 +8,7 @@ public class FastCollinearPoints {
     private ArrayList<LineSegment> lineSegments;
 
     public FastCollinearPoints(Point[] points) {
-        int i, j, k, m;
+        int i, j, k, m, counter;
         ArrayList<Point[]> lineSegmentsPoints = new ArrayList<>();
         lineSegments = new ArrayList<LineSegment>();
         boolean isDuplicate;
@@ -34,8 +34,8 @@ public class FastCollinearPoints {
         for (i = 0; i < points.length; i++) {
             Arrays.sort(pointsCopy, points[i].slopeOrder());
 
-            int counter = 0;
             Point[] tmpPoint = new Point[]{points[i], points[i]};
+            counter = 0;
 
             for (j = 1; j < pointsCopy.length - 1; j++) {
                 if (points[i].slopeTo(pointsCopy[j]) == points[i].slopeTo(pointsCopy[j+1])) {
@@ -67,6 +67,19 @@ public class FastCollinearPoints {
 
                     counter = 0;
                     tmpPoint = new Point[]{points[i], points[i]};
+                }
+            }
+            if (counter >= 2) {
+                isDuplicate = false;
+                for (m = 0; m < lineSegmentsPoints.size(); m++) {
+
+                    if (lineSegmentsPoints.get(m)[0].compareTo(tmpPoint[0]) == 0 &&
+                            lineSegmentsPoints.get(m)[1].compareTo(tmpPoint[1]) == 0) {
+                        isDuplicate = true;
+                    }
+                }
+                if (!isDuplicate) {
+                    lineSegmentsPoints.add(new Point[]{tmpPoint[0], tmpPoint[1]});
                 }
             }
         }
